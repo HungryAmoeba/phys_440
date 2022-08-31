@@ -1,0 +1,137 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\newcommand{\EE}{\mathbb E}
+\newcommand {\R}{\mathbb{R}}
+\usepackage{braket} % add this to preamble
+
+\begin{document}
+\title{Lecture 1}
+\maketitle
+
+Course logistics notes: OH Tuesday 3-4 (tentatively)
+
+Side note: see course website for learning goals and some exercises after class. Prof. doesn't expect us to have read textbook before the class.
+\section{Linear Vector Spaces}
+
+\begin{definition}
+[Vector Space]
+A vector space is a collection of objects $ |1 \rangle , |2 \rangle , \ldots |V \rangle , \ldots  $ called vectors for which there is a definite rule for addition and scalar multiplication.
+\begin{itemize}
+	\item Vectors are closed under addition
+	\item Scalar multiplication is distributive in the scalars and vectors
+	\item Notion of zero vector such that $\vec{0} + \vec{V_1} = \vec{V_1}$
+	\item Subtraction $V_1 + -V_1 = 0$
+	\item Addition is commutative and associative.
+
+	 
+\end{itemize}
+\end{definition}
+
+
+Note that characteristics such as magnitude and direction are not included in the definition. For example, verify that the set of 2x 2 matricies is a vector space, i.e. $ \begin{pmatrix}
+	a & b \\ c & d
+\end{pmatrix}  $
+
+However, something like the set of all 2 x 2 matricies where top left is 1 is not a vector space (not closed under addition or scalar multiplication) $ \begin{pmatrix}
+	1 & b \\ c & d
+\end{pmatrix}  $
+
+\begin{example}
+	[Vector space example]
+Strings f(x) where $ 0 \leq x \leq L $. Define addition and scalar multiplication pointwise. Some restrictions are possible: i.e. periodic functions where $ f(0) = f(L) $, or strings that vanish at the ends.
+\end{example}
+
+\begin{definition}
+[Linear independence]
+$ V_1 \ldots V_n$ are linearly independent if $$ \alpha_1 V_1  + \alpha_2 V_2 \ldots + \alpha_n V_n = 0  \rightarrow \alpha_i \equiv 0$$
+\end{definition}
+\begin{example}
+	[Linear independence]
+	The matricies $ \begin{pmatrix}
+		1 & 0 \\ 0 & 0
+	\end{pmatrix}  $, $ \begin{pmatrix}
+		0 & 1 \\ 0 & 0
+	\end{pmatrix}  $, ... are linearly independent (4 total vectors)
+\end{example}
+
+\begin{definition}
+[Dimension]
+The maximal number of linearly independent vectors in a vector space
+\end{definition}
+
+Suppose there are $ n $ linearly independent vectors in an $ n- $dimensional vector space, denoted $ V_1 , \ldots , V_n $. This set is known as a \vocab{basis}. Any other vector $ V $ can be written as a sum of the basis vectors, with $ V = \sum_{i = 1}^n \alpha_i V_i $ where each $ \alpha_i $ is the \vocab{component}  and each $ V_i $ is a basis vector, and the $ v_i $ are the components.
+
+\begin{theorem}
+	[Vector expressed uniquely with basis]
+For a given basis, each vector $ V $ is uniquely defined by its components.	
+\end{theorem}
+\begin{proof}
+Suppose there are two representations. $ V = \sum \alpha_i V_i $ and $ V = \sum \beta_i V_i $. Subtract them to get $ 0 = \sum(\alpha_i - \beta_i) V_i $. By linear independence of the basis, each component must be unique.
+\end{proof}
+
+
+Vectors will be denoted using braket notation. A vector $ \vec{V} $ will be written as: $ |V\rangle $. Any vector $ V $ is thus expressed as $$ |V\rangle = \sum_{i = 1}^{N} v_i|i\rangle   $$ where each $ |i\rangle $ is a basis vector.
+
+Inner product space: Consider $ \vec{A} = A_x \vec{i} + A_y \vec{j} + A_J \vec{k} $, and similarly for $ \vec{B} $ with coefficients $ B_x $, etc. Consider the usual definition $ \vec{A} \cdot \vec{B} = A_xB_x + A_yB_y + A_zB_z$. This has some properties such as:
+
+\begin{itemize}
+	\item $ \vec{A} \cdot \vec{B} = \vec{B}\cdot \vec{A}$
+	\item $A ( \alpha B + \beta C) = \alpha A\cdot B + \beta \alpha \cdot C$
+	\item $A \cdot A \geq 0$. This equals zero iff $ A = 0 $
+\end{itemize}
+
+The properties of an inner product between any two vectors $ |V \rangle , |W \rangle  $ denoted by $ \braket{V|W}  $ are: 
+
+\begin{definition}
+[Inner product]
+A vector space with inner product is called an inner product space. The inner product obeys the following axioms:
+\begin{itemize}
+	\item $ \braket{V|W}  = \braket{W|V} ^* $
+	\item $ \braket{V|V} \geq 0 $, where it is 0 iff $ |V \rangle  = |0 \rangle  $
+	\item $ \braket{Z|(\alpha | V\rangle + \beta |W \rangle)}  = \alpha \braket{Z|V} + \beta \braket{Z|W}  $
+\end{itemize}
+
+\end{definition}
+
+There is \vocab{antilinearity} of the inner product with respect to the first factor: 
+
+\begin{align}
+	\braket{aW + bZ|V} &= \braket{V|aW + bZ} ^* \\
+			   &= (a \braket{V|W} + b \braket{V|Z} )^* \\
+			   &= a^* \braket{V|W}* + b^* \braket{V|Z} ^* \\
+			   &= a^* \braket{W|V} + b^* \braket{Z|V} 
+\end{align}
+
+
+
+We will make the definition that vectors are \vocab{orthogonal} if their inner product vanishes, and refer to $ \sqrt{ \braket{V|V} } \equiv | V | \equiv \norm{V}$ as the norm or \vocab{length} of the vector. Finally, if a set of basis vectors all have unit norm and are pairwise orthogonal, they are called an \vocab{orthonormal basis} .
+
+
+
+Let $ |V\rangle = \sum_{i = 1}^{N} v_i|i\rangle $, and $ |W\rangle = \sum_{j  =1} ^ N w_j|j\rangle $. Then, the inner product is calculated via 
+\begin{equation}
+	\braket{V|W}  = \sum_i \sum_j v_i^* w_j \braket{i|j} 
+\end{equation}
+
+Note that this collapses down to the "usual" definition \textbf{assuming $ \braket{i|j} = \delta_{ij} $.} We can usually get to this point by invoking the following:
+
+\begin{theorem}
+	[Gram-Schmidt]
+	Given a linearly independent basis we can form linear combinations of the basis vectors to obtain an orthonormal basis. 
+\end{theorem}
+
+Thus, the formula reduces to $ \braket{V|W}  = \sum_i v_i^* w_i $. To see why conjugation is important, consider $ \braket{V|V}  = \sum | V_i | ^2 \geq 0 $. 
+
+Since vectors are uniquely specified by its components in a given basis, we may write 
+\begin{equation}
+	|V \rangle \rightarrow \begin{pmatrix}
+	v_1 \\ v_2 \\ \vdots \\ v_n
+	\end{pmatrix} 
+\end{equation}
+and then the inner product of $ \braket{V|W}  $ is given by 
+
+\begin{equation}
+	\braket{V|W} = \left[ v_1^*, v_2^*, \ldots, v_n^* \right] \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\ w_n \end{bmatrix}
+\end{equation}
+
+\end{document}
