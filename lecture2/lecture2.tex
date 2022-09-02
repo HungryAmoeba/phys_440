@@ -1,0 +1,74 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\newcommand{\EE}{\mathbb E}
+\newcommand {\R}{\mathbb{R}}
+\usepackage{braket}
+\begin{document}
+\title{PHYS 440 Lecture 2}
+\date{September 2, 2022}
+\maketitle
+
+There is a one to one correspondence between bras and kets. Begin by expanding each bra into a row vector:
+
+\begin{equation}
+	\langle v | \leftrightarrow ( v_1^*, \ldots, v_n^* ) 
+\end{equation}
+
+For example, let $ |V_1 \rangle  \leftrightarrow \begin{pmatrix}
+3 + 4i \\ 5 - 6i
+\end{pmatrix} $. This has corresponding bra $ \langle V_1 | \leftrightarrow (3-4i, 5 + 6i) $.
+
+Consider some expansion for a vector $ |V \rangle = \sum_{i = 1}^{ i = N} v_i |i \rangle  $. The adjoint is $ \langle V | = \sum_{i = 1}^{ i = N} \langle i | a_i^* $. Another way of writing this is for $ |V \rangle  = \sum_{i = 1}^{ i = N} |i \rangle \braket{i|V}  $, the adjoint is $ \langle V | = \sum_{i = 1}^{ i = N} \braket{V|i} \langle i |   $.
+
+\begin{example}
+	[Simple example with bras and kets]
+	Let $ |V \rangle = 3 |1 \rangle + (2 + 3i) | 2 \rangle  $, and $ |W \rangle  = (1 + 2i) |1  \rangle + 3 |2 \rangle  $. Find, $$ \braket{V|V} , \braket{V|W} , \braket{W|V} , \braket{W|W}  $$
+\end{example}
+\begin{itemize}
+	\item $ \braket{V|V}  = 9 + 4 + 9 = 22 $
+	\item $ \braket{W|W} = 1 + 4 + 9 = 14 $
+	\item $ \braket{V|W}  = 3 + 6i + 6 - 9i = 9 - 3i $ 
+	\item $ \braket{W|V}  = 9 + 3i $
+\end{itemize}
+
+\section{Gram-Schmidt}
+
+Suppose we begin with two vectors $ |I \rangle , |II \rangle  $ which form a basis. Gram-Schmidt gives two orthonormal vectors from these starting two.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=.25]{/Users/charlesxu/Documents/Yale/Figures/gram_schmidt.jpeg}
+\end{center}
+\caption{}
+\label{fig:gram_schmidt}
+\end{figure}
+
+First choose one vector and normalize it. Then for the next vector, subtract away the projections along the other vectors. Then normalize that vector. Repeat until finished, as in figure 1.
+
+\begin{theorem}
+[Schwartz inequalities]
+\begin{equation}
+	| \braket{V|W}  | ^2 \leq \braket{ V|V} \braket{W|W} 
+\end{equation}
+\end{theorem}
+\begin{proof}
+	Define $ |Z \rangle  = |V \rangle - \frac{ |W \rangle \braket{W|V} }{ \braket{W|W} } $. It must satisfy $ \braket{Z|Z} \geq 0 $. 
+
+	note: $ \alpha |V \rangle + \beta |W \rangle \leftrightarrow \langle V | \alpha ^* + \langle W | \beta^2 $
+\begin{align}
+	\braket{Z|Z} &= \left( \langle V | - \frac{ \braket{V|W} \langle W |  }{ \braket{W|W} } \right) \left( |V \rangle  - \frac{ |W \rangle \braket{W|V} }{ \braket{W|W} }\right) \geq 0 \\
+		     &= \braket{V|V} + \frac{ \braket{V|W} \braket{W|W} \braket{W|V} }{ (\braket{W|W})^2 } - 2 \frac{ \braket{V|W}  \braket{W|V} }{ \braket{W|W} } \geq 0 \\
+	\braket{V|V} \braket{W|W} &\geq \braket{V|W} \braket{W|V} \\
+	| V | ^2 | W | ^2 &\geq | \braket{V|W}  | ^2
+\end{align}
+
+\end{proof}
+
+\begin{corollary}
+	[Triangle Inequality]
+$ | A + B | \leq | A |  + | B |  $
+\end{corollary}
+
+
+
+\end{document}
