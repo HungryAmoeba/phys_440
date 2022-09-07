@@ -1,0 +1,159 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{evan}
+\newcommand{\EE}{\mathbb E}
+\newcommand {\R}{\mathbb{R}}
+\usepackage{braket}
+\usepackage{dsfont}
+\begin{document}
+\title{PHYS 440: Lecture 3}
+\maketitle
+
+\section{Operators}
+
+An operator $ \Omega |V \rangle  = |W \rangle  $. What do we need to specify an operator? This course deals with linear operators: 
+\begin{equation}
+	\Omega(\alpha |V \rangle  + \beta |W \rangle ) = \alpha \Omega |V \rangle  + \beta \Omega |W \rangle 
+\end{equation}
+
+\begin{equation}
+	\Omega ( |V \rangle ) = \Omega ( \sum \alpha_i |i \rangle ) = \sum \alpha_i \Omega |i \rangle 
+\end{equation}
+
+One example is the identity operator, $ \Omega = I $. Then $ I |W \rangle  = |W \rangle  $. Could also scale vectors, i.e. $ \Omega = \alpha I $. 
+
+\begin{example}
+	[Rotation]
+	$ R_x( \frac{ \pi }{ 2 }  $. Consider basis vectors $ |1 \rangle , |2 \rangle , |3 \rangle  $, where $ R_X |1 \rangle  = |1 \rangle  $, $ R_x |2 \rangle = |3 \rangle  $, $ R_x |3 \rangle  = - |2 \rangle  $. Then suppose $ |V \rangle  = 3 |1 \rangle + 2 |2 \rangle  + 9  |3 \rangle  $. It follows that
+	\begin{equation}
+		\Omega |V \rangle  = 3 |1 \rangle  + 2 |3 \rangle - 9 |2 \rangle 
+	\end{equation}
+\end{example}
+
+Suppose $ \Omega |i \rangle  = |i' \rangle  $. Then $ \braket{j|i'} = \langle j | \Omega |i \rangle = \Omega _{ji}  $. This has $ N \times N $ numbers. In our rotation example,
+
+\begin{equation}
+	R \leftrightarrow \begin{pmatrix}
+		1 & 0 & 0 \\ 0 & 0 & -1 \\ 0 & 1  & 0
+	\end{pmatrix} 
+\end{equation}
+
+$ \Omega |V \rangle  = |V' \rangle  $, $ |V' \rangle = \sum v_i \Omega |i \rangle  $, and then
+\begin{align}
+\braket{j|V'} = \sum v_i \langle j | \Omega |i \rangle \\
+v_j' = \sum_i \Omega _{ji} V_i
+\end{align}
+
+\subsection{Compositions of Operators}
+
+Consider operators $ \Lambda, \Omega $. Consider the composition $ \Lambda \Omega |V \rangle  = |V'' \rangle  $. Then
+\begin{equation}
+	V" = \Lambda \Omega V
+\end{equation}
+where $ \Lambda $ and $ \Omega $ represent the matricies associeted to the transition. Note that the operators do not commute, i.e. $ \Lambda \Omega = \Omega \Lambda $.
+
+\subsection{Inverse of an Operator}
+
+One special composition is with the \vocab{inverse} , i.e. $ \Omega ^{-1} \Omega = I $. One way to check if an inverse exists is by seeing if there exists some vector $ \Omega |V \rangle = 0 $ where $ |V \rangle \neq 0 $. If such $ |V \rangle   $ exists, then there is no inverse. To see why this is true, suppose $ \Omega |V \rangle  = |V' \rangle  $, and $ \Omega |W \rangle  = 0 $ where $ |W \rangle  $ is non zero. Then $ \Omega(| V\rangle + |W \rangle ) = \Omega |V \rangle  $, so two vectors map to the same vector in the codomain. Thus no inverse can exist. 
+
+If the inverse does exist:
+\begin{equation}
+	\Omega ^{-1} = \frac{ \text{cof } \Omega }{ \text{det} \Omega } 
+\end{equation}
+where the numerator is the cofactor matrix. Note that $ \Omega ^{-1} \Omega = \Omega \Omega ^{-1} = I $ . Also recall that 
+\begin{equation}
+	(\Lambda \Omega) ^{-1} = \Omega ^{-1} \Lambda ^{-1} 
+\end{equation}
+
+Note: Be prepared to find the inverse of a 3x3 matrix.
+
+Consider $ |V \rangle  = \sum v_i |i \rangle  $. If we want to pull out a term, say $ v_3 $, we calculate $ \braket{3|V}  = v_3 $. This is because
+\begin{align}
+	|V \rangle &= \sum v_i |i \rangle \\ &= \sum \braket{i|V} |i \rangle \\
+		   &= \sum |i  \rangle \braket{i|v} \\
+		   &= \left(\sum |i \rangle \langle i | \right) |V \rangle 
+\end{align}
+
+Thus the term in parenthesis is $ I $. This leads to the important result:
+
+\begin{equation}
+	I = \sum |i \rangle \langle i | 
+\end{equation}
+The writing of a ket times a bra is an \vocab{outer product} which gives an operator. 
+\begin{definition}
+[Projection operator]
+\begin{equation}
+	|i \rangle \langle i | = \mathds{P}_i
+\end{equation}
+This gives the vector component along $ i $ multiplied by $ i $. i.e. $ |i \rangle \braket{i|V}  $. 
+\end{definition}
+
+What if we compose two projection operators? $ (|i \rangle \langle i | ) ( |i \rangle \langle i | ) = \mathds{P}_i$. Thus $ \mathds{P}_i^2 = \mathds{P}_i $, and $ \mathds{P}_j \mathds{P}_i = \delta _{ji} \mathds{P}_i $.
+
+
+NOTE: i have no idea what he wrote here:
+\begin{align}
+	(\Omega \Lambda) _{ij} = (\Omega I \Lambda) _{ij} \langle i | \Omega ( \sum |k \rangle \langle k |  ) \Lambda |j \rangle \sum_k \Omega _{ik} \Lambda _{ki} 
+\end{align}
+
+\subsection{Adjoint}
+$ \alpha |V \rangle  = |\alpha V \rangle  $, and  $ \langle \alpha V | = \langle V | \alpha^* $. Now when it comes to operators,
+\begin{equation}
+	\langle \Omega V | = \langle V | \Omega ^{\dag} 
+\end{equation}
+
+where $ \Omega ^{\dag}  $ represents the adjoint.
+
+\begin{equation}
+	\langle i | \Omega ^{\dag} |j \rangle = \braket{\Omega i|j} = \braket{j|\Omega i} ^*  
+\end{equation}
+
+Where the equation for the ajoint is given by $ \Omega ^{\dag}  _{ij} = \Omega _{ji} ^* $. 
+
+\begin{lemma}
+	[Adjoint of composition]
+	\begin{equation}
+		(\Lambda \Omega) ^{\dag} = \Omega ^{\dag} \Lambda ^{\dag} 
+	\end{equation}
+\end{lemma}
+\begin{proof}
+$ \langle \Omega (\Lambda V) | = \langle \Lambda V | \Omega ^{\dag}  = \langle V | \Lambda ^{\dag} \Omega ^{\dag} \equiv \langle V | (\Omega \Lambda) ^{\dag}   $
+\end{proof}
+
+Suppose we have some $ \alpha |V \rangle  = \beta |W \rangle  + \gamma \Omega \Lambda |Z \rangle + \braket{W|V} |Z \rangle  $ where $ \Lambda, \Omega $ are operators, and other greek letters are numbers. Use the following rules when taking adjoints:
+\begin{itemize}
+	\item ket $ \leftrightarrow $ bra
+	\item $ \alpha \leftrightarrow \alpha ^ * $
+\end{itemize}
+
+\begin{equation}
+	\langle V | \alpha ^* = \langle W |  \beta^* + \langle Z | \Lambda ^{\dag} \Omega ^{\dag} \gamma ^* + \langle Z |  \braket{V|W} 
+\end{equation}
+
+\subsection{Special Operators}
+\begin{definition}
+[Hermitian Operator]
+\begin{equation}
+	\Omega ^{\dag}  = \Omega
+\end{equation}
+Note that this is true when $ \Omega _{ji} ^* = \Omega _{ij}  $
+\end{definition}
+An example of a Hermitian matrix is $ \begin{pmatrix}
+	3 & 3 + 4i \\ 3 - 4i & 4
+\end{pmatrix}  $
+Also note that the product of two Hermitian matricies are not necessary Hermitian (unless they commute)
+
+\begin{definition}
+[Unitary Operator]
+\begin{equation}
+	U ^{\dag} U =  I = U U ^{\dag}  
+\end{equation}
+These are very much like rigid rotations. 
+\end{definition}
+
+\begin{equation}
+	\braket{UW|UV} = \langle W | U ^{\dag} U |V \rangle 
+\end{equation}
+Thus inner product unaffected by unaffected by rigid rotation. Thinking of unitary operators as rigid rotations gives an intuitive way of thinking that the composition of two unitary operators are unitary.  
+
+The columns of the unitary matrix are orthonormal vectors. Similarly, the rows of the unitary matrix are orthonormal vectors. 
+\end{document}
